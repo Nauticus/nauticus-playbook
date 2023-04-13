@@ -3,7 +3,7 @@
 ## Clone
 To clone and fetch submodules
 ```bash
-git clone --recurse-submodules https://github.com/Nauticus/nauticus-playbook
+git clone --recurse-submodules git@github.com:Nauticus/nauticus-playbook.git
 ```
 
 Update submodules
