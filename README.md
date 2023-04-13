@@ -11,6 +11,11 @@ Update submodules
 git submodule update --init
 ```
 
+To run playbook
+```bash
+ansible-playbook -e ansible_user=$(whoami) local.yaml --ask-become-pass --ask-vault-pass
+```
+
 ## Available roles
  - system - system defaults (macos)
  - homebrew - cli utilities and such

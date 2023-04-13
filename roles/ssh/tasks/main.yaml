@@ -1,0 +1,8 @@
+---
+- name: "Ensure that ssh key is copied to .shh directory"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/"
+    owner: "{{ ansible_user }}"
+    mode: preserve
+    force: true

@@ -8,6 +8,9 @@
     - config.yaml
 
   roles:
+    - name: ssh
+      tags: ssh
+
     - name: homebrew
       tags: homebrew
 
