@@ -1,0 +1,3 @@
+kitty:
+  src: "{{ role_path }}/files/"
+  dest: "{{ lookup('env', 'HOME') }}/.config/kitty"

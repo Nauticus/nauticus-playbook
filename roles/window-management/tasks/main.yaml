@@ -1,0 +1,38 @@
+---
+- name: "Ensure yabai is installed"
+  community.general.homebrew:
+    name: koekeishiya/formulae/yabai
+    state: present
+
+- name: "Ensured skhd is installed"
+  community.general.homebrew:
+    name: koekeishiya/formulae/skhd
+    state: present
+
+- name: "Ensure yabai directory exists"
+  ansible.builtin.file:
+    path: "{{ yabai.dest | dirname }}"
+    recurse: true
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: "Ensure skhd directory exists"
+  ansible.builtin.file:
+    recurse: true
+    path: "{{ skhd.dest | dirname }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: "Ensure yabai is linked"
+  ansible.builtin.file:
+    src: "{{ yabai.src }}"
+    dest: "{{ yabai.dest }}"
+    force: true
+    state: link
+
+- name: "Ensure skhd is linked"
+  ansible.builtin.file:
+    src: "{{ skhd.src }}"
+    dest: "{{ skhd.dest }}"
+    force: true
+    state: link

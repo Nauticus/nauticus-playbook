@@ -1,0 +1,30 @@
+---
+- name: "Check if zinit is installed"
+  ansible.builtin.stat:
+    path: "{{ zinit_path }}"
+  register: is_zinit_installed
+
+- name: "Ensure zinit directory is present"
+  ansible.builtin.file:
+    path: "{{ zinit_path }}"
+    recurse: true
+    mode: "0764"
+    state: directory
+    owner: "{{ ansible_user }}"
+  become: true
+  when: is_zinit_installed.stat.isdir is not defined or not is_zinit_installed.stat.isdir
+
+- name: "Ensure zinit is cloned in {{ zinit_path }}"
+  ansible.builtin.git:
+    repo: "https://github.com/zdharma-continuum/zinit"
+    dest: "{{ zinit_path }}/zinit.git"
+    version: "main"
+  when: is_zinit_installed.stat.isdir is not defined or not is_zinit_installed.stat.isdir
+
+- name: "Ensure zshrc is linked"
+  ansible.builtin.file:
+    src: "{{ zshrc.src }}"
+    dest: "{{ zshrc.dest }}"
+    force: true
+    state: link
+  become: true

@@ -1,0 +1,4 @@
+tpm_local_path: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+tmux_config:
+  src: "{{ role_path }}/files/.tmux.conf"
+  dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"

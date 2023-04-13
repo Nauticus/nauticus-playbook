@@ -1,0 +1,19 @@
+---
+- name: "Ensure kitty is installed"
+  community.general.homebrew_cask:
+    name: kitty
+    state: latest
+
+- name: "Ensure kitty folder exists at {{ kitty.dest }}"
+  ansible.builtin.file:
+    path: "{{ kitty.dest }}"
+    recurse: true
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: "Ensure kitty config is linked"
+  ansible.builtin.file:
+    src: "{{ kitty.src }}"
+    dest: "{{ kitty.dest }}"
+    force: true
+    state: link

@@ -1,0 +1,10 @@
+---
+osx_custom_defaults:
+  - { name: "set dock autohide to 1", domain: "com.apple.dock", key: "autohide", type: int, value: 1 }
+  - { name: "set dock autohide delay to 0", domain: "com.apple.dock", key: "autohide-delay", type: float, value: "0" }
+  - { name: "set magnification to off", domain: "com.apple.dock", key: "magnification", type: int, value: 0 }
+  - { name: "set show-recents to off", domain: "com.apple.dock", key: "show-recents", type: int, value: 0 }
+  - { name: "set minimization effect to scale", domain: "com.apple.dock", key: "mineffect", type: string, value: "scale" }
+  - { name: "set not to arrange spaces based on most recent use", domain: "com.apple.dock", key: "mru-spaces", type: int, value: 0 }
+  - { name: "set displays to have separate spaces", domain: "com.apple.spaces", key: "spans-displays", type: int, value: 0 }
+  - { name: "set Finder to show all extensions", domain: "NSGlobalDomain", key: "AppleShowAllExtensions", type: int, value: 1 }

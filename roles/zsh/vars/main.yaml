@@ -1,0 +1,4 @@
+zinit_path: "{{ lookup('env', 'HOME') }}/.local/share/zinit"
+zshrc:
+  src: "{{ role_path }}/files/.zshrc"
+  dest: "{{ lookup('env', 'HOME') }}/.zshrc"

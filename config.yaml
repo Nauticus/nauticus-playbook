@@ -1,0 +1,14 @@
+brew:
+  taps:
+    - homebrew/cask
+    - homebrew/cask-fonts
+    - homebrew/core
+  casks:
+    - font-jetbrains-mono
+    - font-symbols-only-nerd-font
+  packages:
+    - fd
+    - fzf
+    - gh
+    - lazygit
+    - jq

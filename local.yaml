@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  strategy: linear
+  connection: local
+  debugger: on_failed
+
+  vars_files:
+    - config.yaml
+
+  roles:
+    - name: homebrew
+      tags: homebrew
+
+    - name: system
+      tags: system
+
+    - name: window-management
+      tags: window-management
+
+    - name: kitty
+      tags: kitty
+
+    - name: zsh
+      tags: zsh
+
+    - name: tmux
+      tags: tmux
+
+    - name: neovim
+      tags: neovim
