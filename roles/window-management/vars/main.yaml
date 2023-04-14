@@ -1,6 +1,7 @@
+---
 yabai:
-  src: "{{ role_path }}/files/yabairc"
-  dest: "{{ lookup('env', 'HOME') }}/.config/yabai/yabairc"
+    src: "{{ role_path }}/files/yabairc"
+    dest: "{{ lookup('env', 'HOME') }}/.config/yabai/yabairc"
 skhd:
-  src: "{{ role_path }}/files/skhdrc"
-  dest: "{{ lookup('env', 'HOME') }}/.config/skhd/skhdrc"
+    src: "{{ role_path }}/files/skhdrc"
+    dest: "{{ lookup('env', 'HOME') }}/.config/skhd/skhdrc"

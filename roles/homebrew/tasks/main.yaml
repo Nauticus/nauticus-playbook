@@ -2,17 +2,14 @@
 - name: "Update"
   community.general.homebrew:
     update_homebrew: true
-
 - name: "Install Taps"
   community.general.homebrew_tap:
     name: "{{ brew.taps }}"
     state: present
-
 - name: "Install Casks"
   community.general.homebrew_cask:
     name: "{{ brew.casks }}"
     state: present
-
 - name: "Install Packages"
   community.general.homebrew:
     name: "{{ brew.packages }}"

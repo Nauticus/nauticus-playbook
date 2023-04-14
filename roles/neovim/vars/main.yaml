@@ -1,3 +1,4 @@
+---
 neovim:
-  src: "{{ role_path }}/files/"
-  dest: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    src: "{{ role_path }}/files/"
+    dest: "{{ lookup('env', 'HOME') }}/.config/nvim"

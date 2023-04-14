@@ -3,10 +3,8 @@
   strategy: linear
   connection: local
   debugger: on_failed
-
   vars_files:
     - config.yaml
-
   roles:
     - name: ssh
       tags: ssh

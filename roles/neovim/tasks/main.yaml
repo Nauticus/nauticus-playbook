@@ -4,14 +4,12 @@
     name: neovim
     options: "HEAD"
     state: latest
-
 - name: "Ensure neovim folder exists at {{ neovim.dest }}"
   ansible.builtin.file:
     path: "{{ neovim.dest }}"
     recurse: true
     state: directory
     owner: "{{ ansible_user }}"
-
 - name: "Ensure config is linked to {{ neovim.dest }}"
   ansible.builtin.file:
     src: "{{ neovim.src }}"

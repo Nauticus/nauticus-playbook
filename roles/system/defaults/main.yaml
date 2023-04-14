@@ -1,10 +1,19 @@
 ---
 osx_custom_defaults:
-  - { name: "set dock autohide to 1", domain: "com.apple.dock", key: "autohide", type: int, value: 1 }
-  - { name: "set dock autohide delay to 0", domain: "com.apple.dock", key: "autohide-delay", type: float, value: "0" }
-  - { name: "set magnification to off", domain: "com.apple.dock", key: "magnification", type: int, value: 0 }
-  - { name: "set show-recents to off", domain: "com.apple.dock", key: "show-recents", type: int, value: 0 }
-  - { name: "set minimization effect to scale", domain: "com.apple.dock", key: "mineffect", type: string, value: "scale" }
-  - { name: "set not to arrange spaces based on most recent use", domain: "com.apple.dock", key: "mru-spaces", type: int, value: 0 }
-  - { name: "set displays to have separate spaces", domain: "com.apple.spaces", key: "spans-displays", type: int, value: 0 }
-  - { name: "set Finder to show all extensions", domain: "NSGlobalDomain", key: "AppleShowAllExtensions", type: int, value: 1 }
+    - {domain: "com.apple.dock", key: "autohide", name: "Set dock autohide to 1", type: int, value: 1}
+    - {domain: "com.apple.dock", key: "autohide-delay", name: "Set dock autohide delay to 0", type: float, value: "0"}
+    - {domain: "com.apple.dock", key: "magnification", name: "Set magnification to off", type: int, value: 0}
+    - {domain: "com.apple.dock", key: "show-recents", name: "Set show-recents to off", type: int, value: 0}
+    - {domain: "com.apple.dock", key: "mineffect", name: "Set minimization effect to scale", type: string, value: "scale"}
+    - {domain: "com.apple.dock", key: "mru-spaces", name: "Set not to arrange spaces based on most recent use", type: int, value: 0}
+    - {domain: "com.apple.spaces", key: "spans-displays", name: "Set displays to have separate spaces", type: int, value: 0}
+    - {domain: "NSGlobalDomain", key: "AppleShowAllExtensions", name: "Set Finder to show all extensions", type: int, value: 1}
+    - {domain: "NSGlobalDomain", key: "AppleShowAllFiles", name: "Show hidden files in all dialogues", type: bool, value: true}
+    - {domain: "com.apple.finder", key: "AppleShowAllFiles", name: "Show hidden files in finder", type: bool, value: true}
+    - {domain: "com.apple.finder", key: "_FXSortFoldersFirst", name: "Sort folders first in finder", type: bool, value: true}
+    - {domain: "com.apple.finder", key: "FXPreferredViewStyle", name: "Set Finder's default view style", type: string, value: "clmv"}
+    - {domain: "com.apple.finder", key: "NewWindowTargetPath", name: "Set Finder's default location to ~/", type: string, value: "file:///{{ lookup('env', 'HOME') }}"}
+    - {domain: "com.apple.finder", key: "ShowPathbar", name: "Set Finder's Path Bar to show", type: bool, value: true}
+    - {domain: "com.apple.finder", key: "CreateDesktop", name: "Hide desktop icons", type: bool, value: false}
+    - {domain: "com.apple.finder", key: "ShowSidebar", name: "Hide Finder' SideBar", type: bool, value: false}
+    - {domain: "com.apple.finder", key: "FinderSpawnTab", name: "Open folders in windows instead of tabs", type: int, value: 0}

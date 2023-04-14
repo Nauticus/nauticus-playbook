@@ -1,5 +1,4 @@
 ---
-
 - name: "{{ item.name }}"
   community.general.osx_defaults:
     domain: "{{ item.domain | default(omit) }}"

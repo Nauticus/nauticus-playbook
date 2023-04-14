@@ -4,7 +4,6 @@
     name: tmux
     options: "HEAD"
     state: present
-
 - name: "Ensure Tmux Plugin Manager is present in {{ tpm_local_path }}"
   ansible.builtin.file:
     path: "{{ tpm_local_path }}"
@@ -13,7 +12,6 @@
     owner: "{{ ansible_user }}"
   register: is_tpm_installed
   become: true
-
 - name: "Ensure Tmux Plugin Manager is cloned"
   ansible.builtin.git:
     repo: "https://github.com/tmux-plugins/tpm"
@@ -21,7 +19,6 @@
     version: "master"
     update: false
   when: is_tpm_installed.stat.isdir is not defined or not is_tpm_installed.stat.isdir
-
 - name: "Ensure tmux config is linked"
   ansible.builtin.file:
     src: "{{ tmux_config.src }}"
@@ -29,11 +26,9 @@
     force: true
     state: link
   become: true
-
 - name: "Source tmux config"
   ansible.builtin.command: 'tmux source {{ tmux_config.dest }}'
   changed_when: false
-
 - name: "Install tmux plugins"
   ansible.builtin.command: 'sh {{ tpm_local_path }}/scripts/install_plugins.sh'
   changed_when: false
