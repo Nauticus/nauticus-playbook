@@ -1,6 +1,4 @@
 ---
-- block:
-    - include_tasks: osx.yaml
-      loop: "{{ osx_custom_defaults }}"
-  tags:
-    - system
+- name: "Set custom system defaults"
+  ansible.builtin.include_tasks: osx.yaml
+  loop: "{{ osx_custom_defaults }}"

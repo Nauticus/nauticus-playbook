@@ -1,0 +1,9 @@
+---
+- name: "Set wallpaper"
+  ansible.builtin.command:
+    argv:
+      - osascript
+      - -e
+      - 'tell application "Finder" to set desktop picture to POSIX file "{{ lookup("env", "HOME") }}/.config/kitty/wallpaper.png"'
+  register: osa_output
+  changed_when: osa_output.rc == 0

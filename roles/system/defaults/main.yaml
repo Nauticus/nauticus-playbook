@@ -17,3 +17,6 @@ osx_custom_defaults:
     - {domain: "com.apple.finder", key: "CreateDesktop", name: "Hide desktop icons", type: bool, value: false}
     - {domain: "com.apple.finder", key: "ShowSidebar", name: "Hide Finder' SideBar", type: bool, value: false}
     - {domain: "com.apple.finder", key: "FinderSpawnTab", name: "Open folders in windows instead of tabs", type: int, value: 0}
+    - {domain: "com.apple.finder", key: "DisableAllAnimations", name: "Disable all finder animations", type: bool, value: true}
+    - {domain: "com.apple.universalaccess", key: "reduceMotion", name: "Turn reduce motion on", type: int, value: 1}
+    - {domain: "Apple Glabal Domain", key: "com.apple.swipescrolldirection", name: "Turn off natural scrolling", type: int, value: 0}

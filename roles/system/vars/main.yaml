@@ -1,0 +1,2 @@
+---
+wallpaperPath: "{{ lookup('env', 'HOME') }}/Desktop/wallpaper.png"
