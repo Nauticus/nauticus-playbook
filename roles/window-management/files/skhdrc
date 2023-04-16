@@ -22,5 +22,7 @@ cmd + ctrl + alt - o: yabai -m space --layout stack;\
     yabai -m config window_border off
 
 cmd + ctrl + alt - f: yabai -m window --toggle zoom-fullscreen
+cmd + ctrl + alt - s: yabai -m window --toggle split
+cmd + ctrl + alt - b: yabai -m space --balance
 cmd + ctrl + alt - d: yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 cmd + ctrl + alt - n: sh $HOME/.config/yabai/scripts/create_space.sh
