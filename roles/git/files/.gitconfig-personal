@@ -1,0 +1,8 @@
+[user]
+    name = "Nauticus"
+    email = "emanuil.d.ganchev@gmail.com"
+    username = "Nauticus"
+[core]
+    sshCommand = "ssh -i ~/.ssh/id_rsa_nauticus -o IdentitiesOnly=yes"
+
+# vim:ft=toml

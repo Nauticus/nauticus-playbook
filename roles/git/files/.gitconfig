@@ -1,0 +1,13 @@
+[core]
+    editor = "nvim"
+
+[user]
+    name = "Nauticus"
+    email = "emanuil.d.ganchev@gmail.com"
+    username = "Nauticus"
+
+[includeIf "gitdir:~/code/personal/"]
+    path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/code/work/"]
+    path = ~/.gitconfig-work

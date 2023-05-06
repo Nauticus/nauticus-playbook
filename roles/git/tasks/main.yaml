@@ -1,0 +1,21 @@
+---
+- name: "Ensure that gitconfig is present"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/.gitconfig"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    mode: preserve
+    force: true
+
+- name: "Ensure that personal gitconfig is present"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/.gitconfig-personal"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig-personal"
+    mode: preserve
+    force: true
+
+- name: "Ensure that work template gitconfig is build"
+  ansible.builtin.template:
+    src: "{{ role_path }}/files/.gitconfig-work.j2"
+    dest: "{{ role_path }}/files/.gitconfig-work"
+    owner: "{{ ansible_user }}"
+    mode: preserve
