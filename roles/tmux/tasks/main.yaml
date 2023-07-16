@@ -10,7 +10,7 @@
     recurse: true
     state: directory
     owner: "{{ ansible_user }}"
-  register: is_tpm_installed
+  register: tmux_is_tpm_installed
   become: true
 - name: "Ensure Tmux Plugin Manager is cloned"
   ansible.builtin.git:
@@ -18,7 +18,7 @@
     dest: "{{ tpm_local_path }}"
     version: "master"
     update: false
-  when: is_tpm_installed.stat.isdir is not defined or not is_tpm_installed.stat.isdir
+  when: tmux_is_tpm_installed.stat.isdir is not defined or not tmux_is_tpm_installed.stat.isdir
 - name: "Ensure tmux config is linked"
   ansible.builtin.file:
     src: "{{ tmux_config.src }}"
