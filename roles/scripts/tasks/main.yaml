@@ -1,0 +1,22 @@
+---
+- name: "Ensure bin folder is in home directory"
+  ansible.builtin.file:
+      path: "{{ dest }}"
+      recurse: true
+      state: directory
+      owner: "{{ ansible_user }}"
+
+- name: "Parse role files directory"
+  ansible.builtin.find:
+      paths: "{{ src }}"
+      patterns: "*.sh"
+  register: script_files
+
+- name: "Link script files"
+  ansible.builtin.file:
+      src: "{{ item.path }}"
+      dest: "{{ dest }}/{{ item.path | basename }}"
+      mode: a+x
+      force: true
+      state: link
+  with_items: "{{ script_files.files }}"

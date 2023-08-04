@@ -12,6 +12,9 @@
     - name: homebrew
       tags: homebrew
 
+    - name: scripts
+      tags: scripts
+
     - name: system
       tags: system
 
@@ -20,6 +23,9 @@
 
     - name: kitty
       tags: kitty
+
+    - name: wezterm
+      tags: wezterm
 
     - name: zsh
       tags: zsh

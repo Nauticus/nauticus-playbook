@@ -3,10 +3,10 @@
 yabai -m config layout bsp
 yabai -m config split_type auto
 yabai -m config auto_balance off
-yabai -m config top_padding 2
-yabai -m config bottom_padding 2
-yabai -m config right_padding 2
-yabai -m config left_padding 2
+yabai -m config top_padding 4
+yabai -m config bottom_padding 4
+yabai -m config right_padding 4
+yabai -m config left_padding 4
 yabai -m config window_gap 4
 yabai -m config window_border_blur off
 yabai -m config window_border on

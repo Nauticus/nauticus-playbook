@@ -1,0 +1,4 @@
+---
+wezterm:
+    src: "{{ role_path }}/files/"
+    dest: "{{ lookup('env', 'HOME') }}/.config/wezterm"

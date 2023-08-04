@@ -26,3 +26,4 @@ cmd + ctrl + alt - s: yabai -m window --toggle split
 cmd + ctrl + alt - b: yabai -m space --balance
 cmd + ctrl + alt - d: yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 cmd + ctrl + alt - n: sh $HOME/.config/yabai/scripts/create_space.sh
+cmd + ctrl + alt - r: yabai --restart-service

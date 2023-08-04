@@ -1,0 +1,27 @@
+---
+- name: "Tap into cask/versions"
+  community.general.homebrew_tap:
+    name: homebrew/cask-versions
+
+- name: "Ensure wezterm is installed"
+  community.general.homebrew_cask:
+    name: wezterm-nightly
+
+- name: "Ensure wezterm folder exists"
+  ansible.builtin.file:
+    path: "{{ wezterm.dest }}"
+    recurse: true
+    state: directory
+    owner: "{{ ansible_user }}"
+
+- name: "Ensure wezterm config is linked"
+  ansible.builtin.file:
+    src: "{{ wezterm.src }}"
+    dest: "{{ wezterm.dest }}"
+    force: true
+    state: link
+
+- name: "Trigger set wallpaper"
+  ansible.builtin.debug: msg="trigger set wallpaper"
+  notify: "Set wallpaper"
+  changed_when: true
