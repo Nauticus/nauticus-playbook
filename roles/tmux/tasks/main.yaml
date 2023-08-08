@@ -2,7 +2,6 @@
 - name: "Ensure tmux is installed"
   community.general.homebrew:
     name: tmux
-    options: "HEAD"
     state: present
 - name: "Ensure Tmux Plugin Manager is present in {{ tpm_local_path }}"
   ansible.builtin.file:
