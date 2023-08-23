@@ -1,10 +1,50 @@
 [core]
     editor = "nvim"
+    pager = "diff-so-fancy | less --tabs=4 -RFX"
 
-[user]
-    name = "Nauticus"
-    email = "emanuil.d.ganchev@gmail.com"
-    username = "Nauticus"
+[interactive]
+    diffFilter = "diff-so-fancy --patch"
+
+[alias]
+    s = status
+    a = add
+    ap = add -p
+    c = commit
+    cf = commit --fixup
+    d = diff
+    l = log
+    p = push
+    co = checkout
+    cb = checkout -b
+    f = fetch
+    r = rebase
+    ria = rebase -i --autosquash
+    b = branch
+    bl = branch -l
+    blr = branch -l -r
+    st = stash
+    stp = stash show -p
+    unstage = reset HEAD --
+
+[color]
+    ui = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    func = 146 bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+[format]
+    pretty = "%C(yellow)%h%Creset │ %s%Creset %Cblue[%an]%C(auto)%d%Creset"
+    date = short
 
 [includeIf "gitdir:~/code/personal/"]
     path = ~/.gitconfig-personal

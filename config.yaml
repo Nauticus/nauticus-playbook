@@ -8,8 +8,10 @@ brew:
         - font-jetbrains-mono
         - font-symbols-only-nerd-font
     packages:
+        - git
         - fd
         - fzf
         - gh
         - lazygit
+        - diff-so-fancy
         - jq
