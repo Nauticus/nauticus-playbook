@@ -13,7 +13,7 @@ end
 config.font = wezterm.font("JetBrains Mono")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-config.font_size = 12.5
+config.font_size = 13
 config.enable_tab_bar = false
 config.line_height = 1.2
 config.window_decorations = "RESIZE"
@@ -59,7 +59,7 @@ config.background = {
 				orientation = "Vertical",
 				colors = {
 					"#000000",
-					wezterm.color.parse(original_bg_color):darken_fixed(0.06),
+					wezterm.color.parse(original_bg_color):darken_fixed(0.03),
 				},
 				blend = "Rgb",
 				noise = 64,
@@ -78,6 +78,7 @@ config.text_background_opacity = 1
 config.cursor_thickness = "1pt"
 config.max_fps = 144
 config.disable_default_key_bindings = true
+config.strikethrough_position = "0.5cell"
 
 local act = wezterm.action
 
