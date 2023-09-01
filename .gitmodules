@@ -1,4 +1,4 @@
 [submodule "roles/neovim/files"]
 	path = roles/neovim/files
-	url = git@github.com:Nauticus/neovim-config.git
+	url = https://github.com/Nauticus/neovim-config.git
     branch = main

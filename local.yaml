@@ -6,6 +6,9 @@
   vars_files:
     - config.yaml
   roles:
+    - name: git
+      tags: git
+
     - name: ssh
       tags: ssh
 

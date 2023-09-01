@@ -54,6 +54,10 @@ alias vim=nvim
 export EDITOR=nvim
 export PATH=${PATH}:$HOME/bin
 export PATH="/usr/local/bin:$PATH"
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --hidden --no-ignore-vcs --type=d --exclude='**/.git/**'"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

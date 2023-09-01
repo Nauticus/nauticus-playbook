@@ -45,8 +45,8 @@ config.background = {
 			File = os.getenv("HOME") .. "/.config/wezterm/wallpaper.png",
 		},
 		hsb = {
-			brightness = 0.03,
-			hue = 1,
+			brightness = 0.08,
+			hue = 0.6,
 		},
 		opacity = 1,
 		repeat_x = "NoRepeat",
@@ -62,7 +62,7 @@ config.background = {
 					wezterm.color.parse(original_bg_color):darken_fixed(0.03),
 				},
 				blend = "Rgb",
-				noise = 64,
+				noise = 350,
 			},
 		},
 

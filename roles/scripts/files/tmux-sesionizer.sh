@@ -1,9 +1,33 @@
 #!/usr/bin/env bash
 
+# expect a flag to be passed named git
+# define a variable to hold git boolean
+git=false
+
+while getopts ":g" opt; do
+  case $opt in
+    g)
+        git=true
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+  shift
+done
+
 if [[ $# -eq 1 ]]; then
-    selected=$(find $1 -mindepth 1 -maxdepth 1 -type d | fzf)
+    if [[ $git == true ]]; then
+        selected=$(find $1 -name ".git" -maxdepth 4 -exec dirname {} + -prune | fzf)
+    else
+        selected=$(find $1 -mindepth 1 -maxdepth 2 -type d | fzf)
+    fi
 else
-    selected=$(find ~/code/work/ ~/code/personal/ -mindepth 1 -maxdepth 1 -type d | fzf)
+    if [[ $git == true ]]; then
+        selected=$(find . -name ".git" -maxdepth 4 -exec dirname {} + -prune | fzf)
+    else
+        selected=$(find . -mindepth 1 -maxdepth 2 -type d | fzf)
+    fi
 fi
 
 if [[ -z $selected ]]; then
