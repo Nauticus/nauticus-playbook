@@ -18,13 +18,13 @@ done
 
 if [[ $# -eq 1 ]]; then
     if [[ $git == true ]]; then
-        selected=$(find $1 -name ".git" -maxdepth 4 -exec dirname {} + -prune | fzf)
+        selected=$(find $1 -name ".git" -maxdepth 3 -exec dirname {} + -prune | fzf)
     else
         selected=$(find $1 -mindepth 1 -maxdepth 2 -type d | fzf)
     fi
 else
     if [[ $git == true ]]; then
-        selected=$(find . -name ".git" -maxdepth 4 -exec dirname {} + -prune | fzf)
+        selected=$(find . -name ".git" -maxdepth 3 -exec dirname {} + -prune | fzf)
     else
         selected=$(find . -mindepth 1 -maxdepth 2 -type d | fzf)
     fi

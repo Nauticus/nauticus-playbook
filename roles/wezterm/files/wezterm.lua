@@ -42,11 +42,12 @@ config.color_scheme = "Catppuccin_Custom"
 config.background = {
 	{
 		source = {
-			File = os.getenv("HOME") .. "/.config/wezterm/wallpaper.png",
+			File = os.getenv("HOME") .. "/.config/wezterm/wallhaven-d68pdg.jpg",
 		},
+		horizontal_align = "Center",
+		vertical_align = "Top",
 		hsb = {
-			brightness = 0.08,
-			hue = 0.6,
+			brightness = 0.03,
 		},
 		opacity = 1,
 		repeat_x = "NoRepeat",
@@ -54,15 +55,18 @@ config.background = {
 	},
 	{
 		source = {
-			-- Color = "black",
 			Gradient = {
-				orientation = "Vertical",
+				orientation = {
+					Linear = {
+						angle = 135,
+					},
+				},
 				colors = {
 					"#000000",
-					wezterm.color.parse(original_bg_color):darken_fixed(0.03),
+					wezterm.color.parse(original_bg_color):darken_fixed(0.01),
 				},
-				blend = "Rgb",
-				noise = 350,
+				blend = "Oklab",
+				noise = 64,
 			},
 		},
 
@@ -72,9 +76,10 @@ config.background = {
 	},
 }
 
-config.cursor_blink_rate = 700
+config.cursor_blink_rate = 0
 config.animation_fps = 144
 config.text_background_opacity = 1
+config.bold_brightens_ansi_colors = "No"
 config.cursor_thickness = "1pt"
 config.max_fps = 144
 config.disable_default_key_bindings = true
@@ -90,14 +95,15 @@ config.keys = {
 	{ key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
 	-- paste from clipboard
 	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	-- spawn new window
+	{ key = "n", mods = "CMD", action = act.SpawnWindow },
+
 	--increase font size
 	{ key = "!", mods = "LEADER", action = act.IncreaseFontSize },
 	--decrease font size
 	{ key = "$", mods = "LEADER", action = act.DecreaseFontSize },
 	-- reset font size
 	{ key = "*", mods = "LEADER", action = act.ResetFontSize },
-	-- spawn new window
-	{ key = "n", mods = "LEADER", action = act.SpawnWindow },
 	-- activate command palette
 	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
 	-- char select without copying to clipboard

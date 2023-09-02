@@ -25,3 +25,10 @@
     force: true
     state: link
   become: true
+- name: "Ensure .p10k is copied"
+  ansible.builtin.copy:
+    force: false
+    src: "{{ p10k.src }}"
+    dest: "{{ p10k.dest }}"
+    owner: "{{ ansible_user }}"
+  become: true

@@ -3,3 +3,6 @@ zinit_path: "{{ lookup('env', 'HOME') }}/.local/share/zinit"
 zshrc:
     src: "{{ role_path }}/files/.zshrc"
     dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+p10k:
+    src: "{{role_path}}/files/.p10k.zsh"
+    dest: "{{ lookup('env', 'HOME') }}/.p10k.zsh"
