@@ -2,3 +2,12 @@
 - name: "Set custom system defaults"
   ansible.builtin.include_tasks: osx.yaml
   loop: "{{ osx_custom_defaults }}"
+
+- name: "Set wallpaper"
+  ansible.builtin.command:
+    argv:
+      - osascript
+      - -e
+      - 'tell application "System Events" to tell every desktop to set picture to "{{ role_path }}/files/black.png"'
+  register: osa_output
+  changed_when: osa_output.rc == 0

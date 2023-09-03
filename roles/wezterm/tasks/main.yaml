@@ -20,8 +20,3 @@
     dest: "{{ wezterm.dest }}"
     force: true
     state: link
-
-- name: "Trigger set wallpaper"
-  ansible.builtin.debug: msg="trigger set wallpaper"
-  notify: "Set wallpaper"
-  changed_when: true

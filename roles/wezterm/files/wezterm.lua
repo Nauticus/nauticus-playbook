@@ -7,7 +7,7 @@ local config = {}
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
-	config = wezterm.config_builder()
+    config = wezterm.config_builder()
 end
 
 config.font = wezterm.font("JetBrains Mono")
@@ -17,13 +17,13 @@ config.font_size = 13
 config.enable_tab_bar = false
 config.line_height = 1.2
 config.window_decorations = "RESIZE"
+
 config.window_padding = {
-	left = "0cell",
-	right = "0cell",
-	top = "0cell",
-	bottom = "0cell",
+    left = "1cell",
+    right = "1cell",
+    top = 18,
+    bottom = 18,
 }
-config.front_end = "WebGpu"
 
 -- This is where you actually apply your config choices
 
@@ -34,46 +34,46 @@ local original_bg_color = colors.background
 colors.background = "#000000"
 
 config.color_schemes = {
-	["Catppuccin_Custom"] = colors,
+    ["Catppuccin_Custom"] = colors,
 }
 
 config.color_scheme = "Catppuccin_Custom"
 
 config.background = {
-	{
-		source = {
-			File = os.getenv("HOME") .. "/.config/wezterm/wallhaven-d68pdg.jpg",
-		},
-		horizontal_align = "Center",
-		vertical_align = "Top",
-		hsb = {
-			brightness = 0.03,
-		},
-		opacity = 1,
-		repeat_x = "NoRepeat",
-		height = "Cover",
-	},
-	{
-		source = {
-			Gradient = {
-				orientation = {
-					Linear = {
-						angle = 135,
-					},
-				},
-				colors = {
-					"#000000",
-					wezterm.color.parse(original_bg_color):darken_fixed(0.01),
-				},
-				blend = "Oklab",
-				noise = 64,
-			},
-		},
+    {
+        source = {
+            File = os.getenv("HOME") .. "/.config/wezterm/wallpaper.png",
+        },
+        horizontal_align = "Center",
+        vertical_align = "Top",
+        hsb = {
+            brightness = 0.03,
+        },
+        opacity = 1,
+        repeat_x = "NoRepeat",
+    },
+    {
+        source = {
+            Gradient = {
+                orientation = {
+                    Linear = {
+                        angle = 135,
+                    },
+                },
+                colors = {
+                    "#000000",
+                    wezterm.color.parse(original_bg_color):darken_fixed(0.01),
+                },
+                interpolation = "CatmullRom",
+                blend = "Oklab",
+                noise = 150,
+            },
+        },
 
-		width = "100%",
-		height = "100%",
-		opacity = 0.5,
-	},
+        width = "100%",
+        height = "100%",
+        opacity = 0.5,
+    },
 }
 
 config.cursor_blink_rate = 0
@@ -90,24 +90,50 @@ local act = wezterm.action
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
-	{ key = "q", mods = "CMD", action = act.QuitApplication },
-	-- close current window
-	{ key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
-	-- paste from clipboard
-	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
-	-- spawn new window
-	{ key = "n", mods = "CMD", action = act.SpawnWindow },
+    -- Debug
+    { key = "L", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
+    -- Quit
+    { key = "q", mods = "CMD", action = act.QuitApplication },
+    -- close current window
+    { key = "w", mods = "CMD", action = act.CloseCurrentTab({ confirm = true }) },
+    -- paste from clipboard
+    { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+    -- spawn new window
+    { key = "n", mods = "CMD", action = act.SpawnWindow },
 
-	--increase font size
-	{ key = "!", mods = "LEADER", action = act.IncreaseFontSize },
-	--decrease font size
-	{ key = "$", mods = "LEADER", action = act.DecreaseFontSize },
-	-- reset font size
-	{ key = "*", mods = "LEADER", action = act.ResetFontSize },
-	-- activate command palette
-	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
-	-- char select without copying to clipboard
-	{ key = "u", mods = "LEADER", action = act.CharSelect({ copy_on_select = false }) },
+    --increase font size
+    { key = "!", mods = "LEADER", action = act.IncreaseFontSize },
+    --decrease font size
+    { key = "$", mods = "LEADER", action = act.DecreaseFontSize },
+    -- reset font size
+    { key = "*", mods = "LEADER", action = act.ResetFontSize },
+    -- activate command palette
+    { key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
+    -- char select without copying to clipboard
+    { key = "u", mods = "LEADER", action = act.CharSelect({ copy_on_select = false }) },
 }
+
+wezterm.on('user-var-changed', function(window, pane, name, value)
+    local overrides = window:get_config_overrides() or {}
+    if name == "ZEN_MODE" then
+        local incremental = value:find("+")
+        local number_value = tonumber(value)
+        if incremental ~= nil then
+            while (number_value > 0) do
+                window:perform_action(wezterm.action.IncreaseFontSize, pane)
+                number_value = number_value - 1
+            end
+            overrides.enable_tab_bar = false
+        elseif number_value < 0 then
+            window:perform_action(wezterm.action.ResetFontSize, pane)
+            overrides.font_size = nil
+            overrides.enable_tab_bar = true
+        else
+            overrides.font_size = number_value
+            overrides.enable_tab_bar = false
+        end
+    end
+    window:set_config_overrides(overrides)
+end)
 
 return config
