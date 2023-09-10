@@ -13,6 +13,31 @@ end
 config.font = wezterm.font("JetBrains Mono")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+
+config.font_rules = {
+    {
+        intensity = "Normal",
+        font = wezterm.font("JetBrains Mono", { weight = "Light", stretch = "Normal", style = "Normal" }),
+    },
+    {
+        intensity = "Normal",
+        italic = true,
+        font = wezterm.font("JetBrains Mono", { weight = "Light", stretch = "Normal", style = "Italic" }),
+    },
+    {
+        intensity = "Bold",
+        italic = false,
+        font = wezterm.font("JetBrains Mono", { weight = "Medium", stretch = "Normal", style = "Normal" }),
+    },
+    {
+        intensity = "Bold",
+        italic = true,
+        font = wezterm.font("JetBrains Mono", { weight = "Medium", stretch = "Normal", style = "Italic" }),
+    },
+}
+
+config.freetype_load_target = "Normal"
+
 config.font_size = 13
 config.enable_tab_bar = false
 config.line_height = 1.2
@@ -79,6 +104,7 @@ config.background = {
 config.cursor_blink_rate = 0
 config.animation_fps = 144
 config.text_background_opacity = 1
+config.window_background_opacity = 1
 config.bold_brightens_ansi_colors = "No"
 config.cursor_thickness = "1pt"
 config.max_fps = 144
@@ -112,28 +138,5 @@ config.keys = {
     -- char select without copying to clipboard
     { key = "u", mods = "LEADER", action = act.CharSelect({ copy_on_select = false }) },
 }
-
-wezterm.on('user-var-changed', function(window, pane, name, value)
-    local overrides = window:get_config_overrides() or {}
-    if name == "ZEN_MODE" then
-        local incremental = value:find("+")
-        local number_value = tonumber(value)
-        if incremental ~= nil then
-            while (number_value > 0) do
-                window:perform_action(wezterm.action.IncreaseFontSize, pane)
-                number_value = number_value - 1
-            end
-            overrides.enable_tab_bar = false
-        elseif number_value < 0 then
-            window:perform_action(wezterm.action.ResetFontSize, pane)
-            overrides.font_size = nil
-            overrides.enable_tab_bar = true
-        else
-            overrides.font_size = number_value
-            overrides.enable_tab_bar = false
-        end
-    end
-    window:set_config_overrides(overrides)
-end)
 
 return config

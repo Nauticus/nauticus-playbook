@@ -19,17 +19,52 @@ zinit light-mode for \
 
 # Plugins
 # POWERLEVEL10K
-zinit ice depth=1 atload"!source ~/.p10k.zsh"; zinit light romkatv/powerlevel10k
+zinit ice depth=1 atload"!source ~/.p10k.zsh"
+zinit light romkatv/powerlevel10k
+
 export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
-# Load zsh-autosuggestions
-_zsh_autosuggest_atload() {
-    _zsh_autosuggest_start
-    bindkey -M viins "^y" autosuggest-accept
+# FZF
+_zsh_fzf_find_parent_dir() {
+  local declare dirs=()
+  get_parent_dirs() {
+    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
+    if [[ "${1}" == '/' ]]; then
+      for _dir in "${dirs[@]}"; do echo $_dir; done
+    else
+      get_parent_dirs $(dirname "$1")
+    fi
+  }
+  local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf --reverse --height=20% --prompt=">")
+  if [[ -z "${DIR}" ]]; then
+    zle redisplay
+    return 0
+  fi
+  zle push-line
+  BUFFER="builtin cd -- ${DIR}"
+  zle accept-line
+  local ret=$?
+  zle reset-prompt
+  return $ret
 }
 
-# FZF
-zinit ice lucid wait'0b' from"gh-r" as"program"
+__fzf_atload() {
+    export FZF_DEFAULT_OPTS=" \
+        --color=bg+:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,gutter:-1 \
+        --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+        --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+    export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd --hidden --no-ignore-vcs --type=d --max-depth 3 --exclude='**/.git/**'"
+
+    zle -N _zsh_fzf_find_parent_dir
+    bindkey -M vicmd '\eg' _zsh_fzf_find_parent_dir
+    bindkey -M viins '\eg' _zsh_fzf_find_parent_dir
+
+}
+zinit ice lucid wait'0b' from"gh-r" atinit"__fzf_atload" as"program"
 zinit light junegunn/fzf
 # FZF BYNARY AND TMUX HELPER SCRIPT
 zinit ice lucid wait'0c' as"command" pick"bin/fzf-tmux"
@@ -37,17 +72,29 @@ zinit light junegunn/fzf
 # BIND MULTIPLE WIDGETS USING FZF
 zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
 zinit light junegunn/fzf
+
 # FZF-TAB
-zinit ice wait"1" lucid atinit"zicompinit;zicdreplay"
+__fzf_tab_atload() {
+    # set fzf-bindings
+    zstyle ':fzf-tab:*' fzf-bindings 'tab:toggle+select,btab:deselect,ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+    zstyle ':fzf-tab:*' fzf-flags --height 95%
+    zstyle ':fzf-tab:*' switch-group ',' '.'
+    zstyle ':fzf-tab:*' prefix ''
+    zstyle ':completion:*:descriptions' format '[%d]'
+    zstyle ':completion:complete:*:options' sort false
+    zstyle ':completion:*:git-*:*' sort false
+    zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git show --color=always $word'
+    zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word'
+    zstyle ':fzf-tab:complete:git-stash-(apply|pop|show):*' fzf-preview 'git stash show --color -p $word'
+    zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|vim|nvim):*' fzf-preview 'ls -1 --color=always $realpath'
+}
+zinit ice wait"1" lucid atload'__fzf_tab_atload' atinit"zicompinit;zicdreplay"
 zinit light Aloxaf/fzf-tab
 
 # ZSH-SYNTAX-HIGHLIGHTING
 zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" \
         zdharma-continuum/fast-syntax-highlighting \
-    atload'_zsh_autosuggest_atload' \
-    atinit"ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=\"fg=8\"" \
-        zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \
         zsh-users/zsh-completions
 
@@ -72,8 +119,3 @@ alias nvm=fnm
 
 export EDITOR=nvim
 export PATH=${PATH}:$HOME/bin
-
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --hidden --no-ignore-vcs --type=d --exclude='**/.git/**'"

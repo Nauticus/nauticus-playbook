@@ -14,18 +14,22 @@
 
     - name: homebrew
       tags: homebrew
+      when: ansible_facts["os_family"] == 'Darwin'
 
     - name: scripts
       tags: scripts
 
     - name: system
       tags: system
+      when: ansible_facts["os_family"] == 'Darwin'
 
     - name: window-management
       tags: window-management
+      when: ansible_facts["os_family"] == 'Darwin'
 
     - name: kitty
       tags: kitty
+      when: ansible_facts["os_family"] == 'Darwin'
 
     - name: wezterm
       tags: wezterm
