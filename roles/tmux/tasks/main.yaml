@@ -2,50 +2,50 @@
 # https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95 -- macos terminfo database update
 - name: "Update terminfo database"
   block:
-      - name: Create temp build dir
-        tempfile:
-            state: directory
-            suffix: terminfo
-        register: tmp
+    - name: Create temp build dir
+      tempfile:
+        state: directory
+        suffix: terminfo
+      register: tmp
 
-      - name: Download terminfo
-        get_url:
-            url: https://invisible-island.net/datafiles/current/terminfo.src.gz
-            dest: "{{tmp.path}}/terminfo.src.gz"
+    - name: Download terminfo
+      get_url:
+        url: https://invisible-island.net/datafiles/current/terminfo.src.gz
+        dest: "{{tmp.path}}/terminfo.src.gz"
 
-      - name: Unzip terminfo
-        command: gunzip terminfo.src.gz
-        args:
-            chdir: "{{tmp.path}}"
+    - name: Unzip terminfo
+      command: gunzip terminfo.src.gz
+      args:
+        chdir: "{{tmp.path}}"
 
-      - name: Load tmux definition
-        command: "/usr/bin/env tic -xe tmux-256color {{tmp.path}}/terminfo.src"
+    - name: Load tmux definition
+      command: "/usr/bin/env tic -xe tmux-256color {{tmp.path}}/terminfo.src"
 
 - name: "Ensure tmux is installed"
   community.general.homebrew:
-      name: tmux
-      state: present
+    name: tmux
+    state: present
 - name: "Ensure Tmux Plugin Manager is present in {{ tpm_local_path }}"
   ansible.builtin.file:
-      path: "{{ tpm_local_path }}"
-      recurse: true
-      state: directory
-      owner: "{{ ansible_user }}"
+    path: "{{ tpm_local_path }}"
+    recurse: true
+    state: directory
+    owner: "{{ ansible_user }}"
   register: tmux_is_tpm_installed
   become: true
 - name: "Ensure Tmux Plugin Manager is cloned"
   ansible.builtin.git:
-      repo: "https://github.com/tmux-plugins/tpm"
-      dest: "{{ tpm_local_path }}"
-      version: "master"
-      update: false
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "{{ tpm_local_path }}"
+    version: "master"
+    update: false
   when: tmux_is_tpm_installed.stat.isdir is not defined or not tmux_is_tpm_installed.stat.isdir
 - name: "Ensure tmux config is linked"
   ansible.builtin.file:
-      src: "{{ tmux_config.src }}"
-      dest: "{{ tmux_config.dest }}"
-      force: true
-      state: link
+    src: "{{ tmux_config.src }}"
+    dest: "{{ tmux_config.dest }}"
+    force: true
+    state: link
   become: true
 - name: "Source tmux config"
   ansible.builtin.command: "tmux source {{ tmux_config.dest }}"

@@ -4,4 +4,4 @@ wezterm:
     dest: "{{ lookup('env', 'HOME') }}/.config/wezterm"
 
 wezterm_terminfo_path: "{{ lookup('env', 'HOME') }}/tmp/wezterm.terminfo"
-wezterm_terminfo_url: https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo 
+wezterm_terminfo_url: https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo
