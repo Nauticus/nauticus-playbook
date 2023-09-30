@@ -117,5 +117,15 @@ alias mux=tmuxinator
 alias vim=nvim
 alias nvm=fnm
 
+# ZSH HISTORY
+# set history size and file path
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE=~/.zsh_history
+
+setopt share_history
+setopt histignorealldups
+setopt histsavenodups
+
 export EDITOR=nvim
 export PATH=${PATH}:$HOME/bin

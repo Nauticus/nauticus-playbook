@@ -14,33 +14,11 @@ config.font = wezterm.font("JetBrains Mono")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
-config.font_rules = {
-    {
-        intensity = "Normal",
-        font = wezterm.font("JetBrains Mono", { weight = "Light", stretch = "Normal", style = "Normal" }),
-    },
-    {
-        intensity = "Normal",
-        italic = true,
-        font = wezterm.font("JetBrains Mono", { weight = "Light", stretch = "Normal", style = "Italic" }),
-    },
-    {
-        intensity = "Bold",
-        italic = false,
-        font = wezterm.font("JetBrains Mono", { weight = "Medium", stretch = "Normal", style = "Normal" }),
-    },
-    {
-        intensity = "Bold",
-        italic = true,
-        font = wezterm.font("JetBrains Mono", { weight = "Medium", stretch = "Normal", style = "Italic" }),
-    },
-}
-
 config.freetype_load_target = "Normal"
 
 config.font_size = 13
 config.enable_tab_bar = false
-config.line_height = 1.2
+config.line_height = 1.1
 config.window_decorations = "RESIZE"
 
 config.window_padding = {
