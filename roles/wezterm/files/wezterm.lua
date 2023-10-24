@@ -10,15 +10,15 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("SF Mono")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 config.freetype_load_target = "Normal"
 
-config.font_size = 13
+config.font_size = 12
 config.enable_tab_bar = false
-config.line_height = 1.1
+config.line_height = 1.3
 config.window_decorations = "RESIZE"
 
 config.window_padding = {
