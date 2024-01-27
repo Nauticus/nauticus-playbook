@@ -16,10 +16,8 @@ cmd + shift - right: yabai -m window --resize right:50:0; yabai -m window --resi
 ctrl + shift - left: yabai -m window --space prev; skhd -k "ctrl - left"
 ctrl + shift - right: yabai -m window --space next; skhd -k "ctrl - right"
 
-cmd + ctrl + alt - a: yabai -m space --layout bsp;\
-    yabai -m config window_border on
-cmd + ctrl + alt - o: yabai -m space --layout stack;\
-    yabai -m config window_border off
+cmd + ctrl + alt - a: yabai -m space --layout bsp
+cmd + ctrl + alt - o: yabai -m space --layout stack
 
 cmd + ctrl + alt - f: yabai -m window --toggle zoom-fullscreen
 cmd + ctrl + alt - s: yabai -m window --toggle split

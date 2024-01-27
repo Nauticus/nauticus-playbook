@@ -10,22 +10,23 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("SF Mono")
+config.font = wezterm.font("Iosevka")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 config.freetype_load_target = "Normal"
+config.freetype_load_flags = "NO_HINTING"
 
-config.font_size = 12
+config.font_size = 14
 config.enable_tab_bar = false
-config.line_height = 1.3
+config.line_height = 1.0
 config.window_decorations = "RESIZE"
 
 config.window_padding = {
     left = "1cell",
     right = "1cell",
-    top = 18,
-    bottom = 18,
+    top = "0.7cell",
+    bottom = "0cell",
 }
 
 -- This is where you actually apply your config choices
