@@ -20,14 +20,12 @@ yabai -m config mouse_modifier fn
 # yabai -m config normal_window_border_color 0x00FFFFFF
 
 # exclude Chrome Picture in Picture windows
-yabai -m rule --add title="^(Picture in Picture|Picture-in-Picture)$" manage=off
+yabai -m rule --add title="^(Picture in Picture|Picture-in-Picture)$" manage=off mouse_follows_focus=off
 yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^1Password$" manage=off layer=above
+yabai -m rule --add app="^System Preferences$" manage=off layer=above
 yabai -m rule --add title='^Slack \| mini panel$' manage=off layer=above border=off
 yabai -m rule --add subrole="^AXSystemDialog$" manage=off mouse_follows_focus=off
 
-# yabai -m signal --add event=space_changed action="$HOME/.config/yabai/scripts/yabai_borders.sh"
-
-yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=space_changed action="$HOME/.config/yabai/scripts/yabai_pip_manage.sh"
