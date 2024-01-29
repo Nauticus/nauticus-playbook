@@ -3,21 +3,15 @@
 yabai -m config layout bsp
 yabai -m config split_type auto
 yabai -m config auto_balance off
-yabai -m config window_border_blur off
-yabai -m config window_border off
-# yabai -m config window_border_width 3
-# yabai -m config window_border_radius 10
-yabai -m config top_padding 4
-yabai -m config bottom_padding 4
-yabai -m config right_padding 4
-yabai -m config left_padding 4
-yabai -m config window_gap 4
+yabai -m config top_padding 2
+yabai -m config bottom_padding 2
+yabai -m config right_padding 2
+yabai -m config left_padding 2
+yabai -m config window_gap 10
 yabai -m config mouse_follows_focus on
 yabai -m config window_placement second_child
 yabai -m config mouse_modifier fn
-
-# yabai -m config active_window_border_color 0xFF89b4fa
-# yabai -m config normal_window_border_color 0x00FFFFFF
+yabai -m config focus_follows_mouse autofocus
 
 # exclude Chrome Picture in Picture windows
 yabai -m rule --add title="^(Picture in Picture|Picture-in-Picture)$" manage=off mouse_follows_focus=off
@@ -29,6 +23,7 @@ yabai -m rule --add title='^Slack \| mini panel$' manage=off layer=above border=
 yabai -m rule --add subrole="^AXSystemDialog$" manage=off mouse_follows_focus=off
 
 yabai -m signal --add event=space_changed action="$HOME/.config/yabai/scripts/yabai_pip_manage.sh"
+yabai -m signal --add event=mission_control_exit action="$HOME/.config/yabai/scripts/yabai_pip_manage.sh"
 
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"

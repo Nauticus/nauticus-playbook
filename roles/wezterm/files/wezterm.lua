@@ -10,14 +10,14 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("Iosevka")
+config.font = wezterm.font("Berkeley Mono")
 
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 config.freetype_load_target = "Normal"
 config.freetype_load_flags = "NO_HINTING"
 
-config.font_size = 14
+config.font_size = 13
 config.enable_tab_bar = false
 config.line_height = 1.0
 config.window_decorations = "RESIZE"
