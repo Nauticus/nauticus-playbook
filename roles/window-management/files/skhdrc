@@ -18,9 +18,9 @@ ctrl + shift - right: yabai -m window --space next; skhd -k "ctrl - right"
 
 ctrl + shift + alt - a: sh $HOME/.config/yabai/scripts/yabai_toggle_layout.sh
 
-cmd + ctrl + alt - f: yabai -m window --toggle zoom-fullscreen
-cmd + ctrl + alt - s: yabai -m window --toggle split
-cmd + ctrl + alt - b: yabai -m space --balance
-cmd + ctrl + alt - d: yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
-cmd + ctrl + alt - n: sh $HOME/.config/yabai/scripts/create_space.sh
-cmd + ctrl + alt - r: yabai --restart-service
+ctrl + shift + alt - f: yabai -m window --toggle zoom-fullscreen
+ctrl + shift + alt - s: yabai -m window --toggle split
+ctrl + shift + alt - b: yabai -m space --balance
+ctrl + shift + alt - d: yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
+ctrl + shift + alt - n: sh $HOME/.config/yabai/scripts/create_space.sh
+ctrl + shift + alt - r: yabai --restart-service
